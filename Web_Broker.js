@@ -15,11 +15,6 @@
 */
 
 $(document).ready(function(){
-    
-var lifetime = 60; // minutes
-var welcome_text = "Your ID (if you don't have anyone just enter guest)";
-var exit_txt = "Authentication failed! Closing connection...";
-
 var MD5 = function (string) {
  
     function RotateLeft(lValue, iShiftBits) {
@@ -236,26 +231,37 @@ var delCookie = function (key){
     document.cookie =  'IONsession=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-var hash;
+var exit = function(){
+        $('body').remove();
+        delCookie('IONsession');
+        alert('Authentication failed! Closing connection...');
+}
 
+var hash;
 if(getCookie('IONsession')==null)
 {
-    var userid = prompt(welcome_txt, "guest");
+    var userid = prompt("Your ID (if you don't have anyone just enter guest)", "guest");
     hash = MD5(userid);
-    setCookie('IONsession', hash, session_lifetime );
+    setCookie('IONsession', hash, 60 );
 }
 else
 {
     hash = getCookie('IONsession');
 }
 var key_found = false;
-$.getJSON("Scripts/data.json", function(data){
+$.getJSON("data.json", function(data){
     $.each(data.users, function(k,v){
         if(hash==k)
         {
             for( k_k in v )
             {
                 $.each($("a"), function(kk,vv){
+                    if(document.URL.indexOf(v[k_k])>=0)
+                    {
+                        console.log('sa');
+                        exit();
+                        return false;
+                    }
                     if(vv.getAttribute("href")!=null)
                     {
                         if(vv.getAttribute("href").indexOf(v[k_k])>=0)
@@ -272,9 +278,7 @@ $.getJSON("Scripts/data.json", function(data){
 }).done(function(){
     if(key_found==false)
     {
-        $('body').remove();
-        delCookie('IONsession');
-        alert(exit_txt);
+        exit();
     }
 });
 
