@@ -12,9 +12,16 @@ Example:
 
 The first one: 4de4bc48e1a3edcbd226eecee7a212ca is MD5("engels")
 The second one: 084e0343a0486ff05530df6c705c8bb4 is MD5("guest")
+Note that engels and guest are ION users
 For engels and guest the diagrams that contains the words "tamburco" and "andahuaylas" are hidden.
 
 Copy data.json to folder: C:/Program Files/Schneider Electric/Power Monitoring Expert/system/WebReach/Scripts
 Then visit http://support.microsoft.com/kb/942032 for learn how to add json MIME type to IIS.
+
+
+Web_Broker.js explained:
+this must be copied at the end of the file: realtime.js
+Note that we have some parameters that you can change like: session_lifetime, welcome_txt, exit_txt, datafile
+
 
 Regards
