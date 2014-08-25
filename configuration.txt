@@ -1,0 +1,16 @@
+data.json explained:
+
+Example:
+
+{
+	"users":
+	{
+		"4de4bc48e1a3edcbd226eecee7a212ca":{"1":"tamburco","2":"andahuaylas"},
+		"084e0343a0486ff05530df6c705c8bb4":{"1":"tamburco","2":"andahuaylas"}
+	}
+}
+
+The first one: 4de4bc48e1a3edcbd226eecee7a212ca is "engels"
+The second one: 084e0343a0486ff05530df6c705c8bb4 is "guest"
+For engels and guest the diagrams that contains the words "tamburco" and "andahuaylas" are hidden.
+
