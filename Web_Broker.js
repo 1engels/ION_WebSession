@@ -15,6 +15,12 @@
 */
 
 $(document).ready(function(){
+    
+var session_lifetime = 60; // minutes
+var welcome_txt = "Your ID (if you don't have anyone just enter guest)" ;
+var exit_txt = "Authentication failed! Closing connection...";
+var datafile = "Scripts/data.json";
+    
 var MD5 = function (string) {
  
     function RotateLeft(lValue, iShiftBits) {
@@ -234,22 +240,22 @@ var delCookie = function (key){
 var exit = function(){
         $('body').remove();
         delCookie('IONsession');
-        alert('Authentication failed! Closing connection...');
+        alert(exit_txt);
 }
 
 var hash;
 if(getCookie('IONsession')==null)
 {
-    var userid = prompt("Your ID (if you don't have anyone just enter guest)", "guest");
+    var userid = prompt(welcome_txt, "guest");
     hash = MD5(userid);
-    setCookie('IONsession', hash, 60 );
+    setCookie('IONsession', hash, session_lifetime );
 }
 else
 {
     hash = getCookie('IONsession');
 }
 var key_found = false;
-$.getJSON("data.json", function(data){
+$.getJSON( datafile , function(data){
     $.each(data.users, function(k,v){
         if(hash==k)
         {
