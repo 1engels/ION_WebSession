@@ -4,6 +4,7 @@
     
     This script creates and validates users (one by one) to show/hide respective diagrams.
     Just add it to the end of realtime.js file.
+    By default the session life is 1 hour (change the value of lifetime lines below)
     Do not forget to copy data.json and add it into MIME types permitted in IIS manager
     For more information visit http://support.microsoft.com/kb/942032 Resolution 2.
 
@@ -14,6 +15,11 @@
 */
 
 $(document).ready(function(){
+    
+var lifetime = 60; // minutes
+var welcome_text = "Your ID (if you don't have anyone just enter guest)";
+var exit_txt = "Authentication failed! Closing connection...";
+
 var MD5 = function (string) {
  
     function RotateLeft(lValue, iShiftBits) {
@@ -231,11 +237,12 @@ var delCookie = function (key){
 }
 
 var hash;
+
 if(getCookie('IONsession')==null)
 {
-    var userid = prompt("Your ID (if you don't have anyone just enter guest)", "guest");
+    var userid = prompt(welcome_txt, "guest");
     hash = MD5(userid);
-    setCookie('IONsession', hash, 60 );
+    setCookie('IONsession', hash, session_lifetime );
 }
 else
 {
@@ -267,7 +274,7 @@ $.getJSON("Scripts/data.json", function(data){
     {
         $('body').remove();
         delCookie('IONsession');
-        alert('Authentication failed! Closing connection...');
+        alert(exit_txt);
     }
 });
 
