@@ -264,7 +264,6 @@ $.getJSON( datafile , function(data){
                 $.each($("a"), function(kk,vv){
                     if(document.URL.indexOf(v[k_k])>=0)
                     {
-                        console.log('sa');
                         exit();
                         return false;
                     }
