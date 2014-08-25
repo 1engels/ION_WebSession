@@ -10,8 +10,8 @@ Example:
 	}
 }
 
-The first one: 4de4bc48e1a3edcbd226eecee7a212ca is "engels"
-The second one: 084e0343a0486ff05530df6c705c8bb4 is "guest"
+The first one: 4de4bc48e1a3edcbd226eecee7a212ca is MD5("engels")
+The second one: 084e0343a0486ff05530df6c705c8bb4 is MD5("guest")
 For engels and guest the diagrams that contains the words "tamburco" and "andahuaylas" are hidden.
 
 Copy data.json to folder: C:/Program Files/Schneider Electric/Power Monitoring Expert/system/WebReach/Scripts
