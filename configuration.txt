@@ -11,7 +11,7 @@ Example:
 }
 
 The first one: 4de4bc48e1a3edcbd226eecee7a212ca is MD5("engels0") where id is "engels" and password is "0"
-The second one: 084e0343a0486ff05530df6c705c8bb4 is MD5("guest") where id is "guest" and password is "0"
+The second one: 084e0343a0486ff05530df6c705c8bb4 is MD5("guest0") where id is "guest" and password is "0"
 Note that engels and guest are ION users
 For engels and guest the diagrams that contains the words "tamburco" and "andahuaylas" are hidden.
 
