@@ -14,12 +14,13 @@
     yo@engelsrodriguez.me
 */
 
+
 $(document).ready(function(){
     
 var session_lifetime = 60; // minutes
 var welcome_txt = "Your ID (if you don't have anyone just enter guest)" ;
 var exit_txt = "Authentication failed! Closing connection...";
-var datafile = "Scripts/data.json";
+var datafile = "data.json";
     
 var MD5 = function (string) {
  
@@ -243,17 +244,56 @@ var exit = function(){
         alert(exit_txt);
 }
 
+
+var pass_prompt = function(label_message, button_message, width, height, callback) {
+
+    if (typeof label_message !== "string") var label_message = "Password:";
+    if (typeof button_message !== "string") var button_message = "Submit";
+    if (typeof arg3 === "function") {
+        var callback = arg3;
+    }
+
+    if (typeof width !== "number") var width = 290;
+    if (typeof height !== "number") var height = 170;
+
+    $("body").append("<div class='dark_bg'></div>");
+    $(".dark_bg").css({"width":"100%","height":"100%","position":"absolute","z-index":"20","top":"0","left":"0", "background":"white"});
+
+    $("body").append("<div class='pass_prompt'></div>");
+    $div = $(".pass_prompt");
+
+    $div.append("<br/>");
+
+    $div.css({"background":"#fdfdfd","color":"black","border":"1px solid #888","width":width+"px",
+        "height":height+"px", "padding":"20px", "position":"fixed", "left":(50-100*width/(2*window.innerWidth))+"%",
+        "top":"0", "z-index":"100", "font-family":"arial", "font-size":"14px"});
+
+    $(".pass_prompt").append("<label>User:</label>");
+    $div.append("<br/>");
+    $div.append("<input type='text' class='user' required>");
+    
+    $div.append("<br/>").append("<br/>");
+
+    $(".pass_prompt").append("<label>Password:</label>");
+    $div.append("<br/>");
+    $div.append("<input type='password' class='pass' required>");
+
+    $div.append("<br/>").append("<br/>");
+    $div.append("<input type='button' value='OK' class='prompt_submit'>");
+    $(".prompt_submit").css({"border":"1px solid #888", "font-family":"calibri,arial", "font-size":"13px",
+                    "background":"#fefefe", "padding":"5px 25px", "font-weight":"bold"}).click( function()
+{
+    $(".pass_prompt").hide();
+    validate(MD5($(".user").val() + $(".pass").val()));  
+
+} );
+
+};
+
 var hash;
-if(getCookie('IONsession')==null)
-{
-    var userid = prompt(welcome_txt, "guest");
-    hash = MD5(userid);
-    setCookie('IONsession', hash, session_lifetime );
-}
-else
-{
-    hash = getCookie('IONsession');
-}
+
+var validate = function(hash){
+$(".dark_bg").hide();
 var key_found = false;
 $.getJSON( datafile , function(data){
     $.each(data.users, function(k,v){
@@ -277,7 +317,6 @@ $.getJSON( datafile , function(data){
                 });
             }
             key_found= true;
-            return key_found;
         }
     });
 }).done(function(){
@@ -285,6 +324,25 @@ $.getJSON( datafile , function(data){
     {
         exit();
     }
+    else
+    {
+        setCookie('IONsession', hash, session_lifetime );
+    }
 });
 
+}
+
+if(getCookie('IONsession')==null)
+{
+    pass_prompt();
+}
+else
+{
+    hash = getCookie('IONsession');
+    validate(hash);
+}
+
+
 });
+
+
