@@ -21,7 +21,7 @@ Then visit http://support.microsoft.com/kb/942032 for learn how to add json MIME
 
 
 Web_Broker.js explained:
-this must be copied at the end of the file: realtime.js
+The content of this file must be copied at the end of the file: realtime.js
 Note that we have some parameters that you can change like: session_lifetime, welcome_txt, exit_txt, datafile
 
 
