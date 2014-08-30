@@ -245,9 +245,7 @@ var exit = function(){
 }
 
 
-var pass_prompt = function(label_message, button_message, width, height, callback) {
-
-
+var pass_prompt = function( width, height) {
 
     if (typeof width !== "number") var width = 290;
     if (typeof height !== "number") var height = 170;
