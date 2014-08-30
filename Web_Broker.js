@@ -20,7 +20,7 @@ $(document).ready(function(){
 var session_lifetime = 60; // minutes
 var welcome_txt = "Your ID (if you don't have anyone just enter guest)" ;
 var exit_txt = "Authentication failed! Closing connection...";
-var datafile = "data.json";
+var datafile = "Scrpits/data.json";
     
 var MD5 = function (string) {
  
