@@ -247,11 +247,7 @@ var exit = function(){
 
 var pass_prompt = function(label_message, button_message, width, height, callback) {
 
-    if (typeof label_message !== "string") var label_message = "Password:";
-    if (typeof button_message !== "string") var button_message = "Submit";
-    if (typeof arg3 === "function") {
-        var callback = arg3;
-    }
+
 
     if (typeof width !== "number") var width = 290;
     if (typeof height !== "number") var height = 170;
